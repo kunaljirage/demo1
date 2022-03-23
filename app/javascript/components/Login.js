@@ -1,36 +1,44 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import getUserData from "./hooks/getUserData";
 import { useUserContext } from "./hooks/userContext";
 
 const Login = () => {
-  const [data,setData] = useState({user_name:'',password:''});
-  const {user_name,password}=data;
+  const [data,setData] = useState({email:'',password:''});
+ const [getUser] = getUserData();
+   const { email, password }=data;
   const handleChange = (e) =>{
  setData({...data,[e.target.name]:e.target.value})
 }
 const {setUser}=useUserContext();
 const navigate = useNavigate();
 const location = useLocation();
+
+const setCookie = (cName, cValue) => {
+  let date = new Date();
+  date.setTime(date.getTime() + (86400000 * 20));
+  const expires = "expires=" + date.toUTCString();
+  document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
+}
 const from = location.state?.from?.pathname || "/rental_property_details"
+
       const handleSubmit =async (event) =>{
           event.preventDefault();
-          const response = await fetch("/api/v1/user/login", {
+          const response = await fetch("/api/v1/auth/login", {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({"user":data })
+            body: JSON.stringify({data })
             });
 
             response.json().then(data => {
-
-
               if(data.message==='successful')
               {
                 setData({user_name:'',password:''});
-                sessionStorage.setItem("user",JSON.stringify(data.user));
-                setUser(data.user)
+                setCookie('token', data.token);
+                getUser();
                 navigate(from,{replace:true})
                 }
               else{
@@ -61,10 +69,10 @@ const from = location.state?.from?.pathname || "/rental_property_details"
               <h4>Login</h4>
               <input
                 className="form-control mb-3"
-                placeholder="User Name"
+                placeholder="Email"
                 type="text"
-                name="user_name"
-                value={user_name}
+                name="email"
+                value={email}
                 onChange={ (e) => handleChange(e)}
                 required
               />

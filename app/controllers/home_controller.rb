@@ -1,13 +1,6 @@
 class HomeController < ApplicationController
+  skip_before_action :authenticate_request, only: [:index]
+
   def index
-  end
-
-  def create
-  end
-
-  def show
-  end
-
-  def destroy
   end
 end

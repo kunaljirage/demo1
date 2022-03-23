@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "./hooks/userContext";
+
 
 const RentalPropertyDetails = () => {
   let navigate = useNavigate();
+  const file = useRef();
   const [data, setData] = useState({
     owner_name: "",
     owner_contact_number: "",
@@ -12,8 +13,7 @@ const RentalPropertyDetails = () => {
     city: "",
     image:""
   });
-  const { user } = useUserContext();
-  const { owner_name, owner_contact_number, price, city } = data;
+  const { owner_name, owner_contact_number, price, city} = data;
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -28,45 +28,44 @@ const handleSubmit = async (event) => {
   const  formData = new FormData();
     event.preventDefault();
    for (const key in data) {
-      formData.append(`${key}`, `${data[key]}`);
+      formData.append(key, data[key]);
     }
 
+    let token= document.cookie;
+     token=token.split("=");
 
-
+if(token[1]){
  const response = await fetch(`/api/v1/property/`, {
       method: "POST",
       headers: {
         Accept: "application/json",
-       "Content-Type": "multipart/form-data",
+       'Authorization':token[1]
       },
       body:formData,
     });
 
     response.json().then((data) => {
-      console.log(data);
-      // setData({
-      //   owner_name: "",
-      //   owner_contact_number: "",
-      //   rental_type: "",
-      //   price: "",
-      //   city: "",
-      // });
+      if(data.message)
+      {
+        alert(data.message)
+        setData({
+          owner_name: "",
+          owner_contact_number: "",
+          rental_type: "",
+          price: "",
+          city: "",
+        });
+        file.current.value = "";
+      }
+
+
     });
+  }
   };
 
   return (
     <>
       <main className="container mt-4">
-        <div className="d-flex  justify-content-end">
-          <button
-            className="btn  btn-primary"
-            onClick={() => {
-              navigate("/user_rental_property_list");
-            }}
-          >
-            See Your Ads List
-          </button>
-        </div>
         <div
           className="row  w-100 d-flex justify-content-center align-items-center"
           style={{ height: "100vh" }}
@@ -126,10 +125,10 @@ const handleSubmit = async (event) => {
                     className="form-check-input"
                     type="radio"
                     name="rental_type"
-                    value="full house"
+                    value="Full house"
                     id="full house"
                     onChange={(e) => handleChange(e)}
-                    checked={data.rental_type=== "full house"?true:false }
+                    checked={data.rental_type=== "Full house"?true:false }
                   />
                   <label className="form-check-label" htmlFor="full house">
                     Full house
@@ -140,10 +139,10 @@ const handleSubmit = async (event) => {
                     className="form-check-input"
                     type="radio"
                     name="rental_type"
-                    value="pg/hostel"
+                    value="Pg / hostel"
                     id="pg/hostel"
                     onChange={(e) => handleChange(e)}
-                    checked={data.rental_type=== "pg/hostel"?true:false }
+                    checked={data.rental_type=== "Pg / hostel"?true:false }
                   />
                   <label className="form-check-label" htmlFor="pg/hostel">
                     Pg / Hostel
@@ -154,10 +153,10 @@ const handleSubmit = async (event) => {
                     className="form-check-input"
                     type="radio"
                     name="rental_type"
-                    value="flatmates"
+                    value="Flatmates"
                     id="flatmate"
                     onChange={(e) => handleChange(e)}
-                    checked={data.rental_type=== "flatmates"?true:false }
+                    checked={data.rental_type=== "Flatmates"?true:false }
                   />
                   <label className="form-check-label" htmlFor="flatmate">
                     Flatmates
@@ -170,6 +169,7 @@ const handleSubmit = async (event) => {
                 type="file"
                 onChange={(e) => fileSelectedHandler(e)}
                 name="file"
+                ref={file}
               />
               <div className="d-flex  justify-content-center">
                 <button className="w-100 btn  btn-primary" type="submit">

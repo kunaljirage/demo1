@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import getProperty from "./hooks/getProperty";
-import { useUserContext } from "./hooks/userContext";
 
 const EditRentalPropertyDetails = () => {
   const navigate = useNavigate();
@@ -42,12 +41,15 @@ setData({
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    let token= document.cookie;
+    token=token.split("=");
+    if(token[1]){
     const response = await fetch(`/api/v1/property/edit/${location.state.property.id}`, {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        'Authorization':token[1]
       },
       body: JSON.stringify({ property: { ...data } }),
     });
@@ -65,6 +67,7 @@ setData({
       navigate("/user_rental_property_list")
     }
     });
+  }
 
   };
 
@@ -130,10 +133,10 @@ setData({
                     className="form-check-input"
                     type="radio"
                     name="rental_type"
-                    value="full house"
+                    value="Full house"
                     id="full house"
                     onChange={(e) => handleChange(e)}
-                    checked={data.rental_type=== "full house"?true:false }
+                    checked={data.rental_type=== "Full house"?true:false }
                   />
                   <label className="form-check-label" htmlFor="full house">
                     Full house
@@ -144,10 +147,10 @@ setData({
                     className="form-check-input"
                     type="radio"
                     name="rental_type"
-                    value="pg/hostel"
+                    value="Pg / hostel"
                     id="pg/hostel"
                     onChange={(e) => handleChange(e)}
-                    checked={data.rental_type=== "pg/hostel"?true:false }
+                    checked={data.rental_type=== "Pg / hostel"?true:false }
                   />
                   <label className="form-check-label" htmlFor="pg/hostel">
                     Pg / Hostel
@@ -158,10 +161,10 @@ setData({
                     className="form-check-input"
                     type="radio"
                     name="rental_type"
-                    value="flatmates"
+                    value="Flatmates"
                     id="flatmate"
                     onChange={(e) => handleChange(e)}
-                    checked={data.rental_type=== "flatmates"?true:false }
+                    checked={data.rental_type=== "Flatmates"?true:false }
                   />
                   <label className="form-check-label" htmlFor="flatmate">
                     Flatmates

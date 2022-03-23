@@ -6,7 +6,9 @@ const Home = () => {
   const [citiesData,setCitiesData] = useState([])
   const [data] = rentalPropertyData();
   const [city, setCity] = useState("");
+  const [propertyData, setPropertyData] =useState([])
 useEffect(() => {
+  setPropertyData(data)
   if(data)
   {
   const cities = data.map((property)=>property.city.toLowerCase())
@@ -15,6 +17,8 @@ useEffect(() => {
   console.log(data)
   setCitiesData(uniqueCities)
  }
+
+
  }, [data])
 
 const handleChange = (e) => {
@@ -75,6 +79,7 @@ const handleChange = (e) => {
                 type="radio"
                 name="type"
                 id="full_house"
+                value="Full house"
               />
               <label className="form-check-label" htmlFor="full_house">
                 Full house
@@ -86,6 +91,7 @@ const handleChange = (e) => {
                 type="radio"
                 name="type"
                 id="pg"
+                value="Pg / hostel"
               />
               <label className="form-check-label" htmlFor="pg">
                 Pg / Hostel
@@ -97,6 +103,7 @@ const handleChange = (e) => {
                 type="radio"
                 name="type"
                 id="flatmates"
+                value="Flatmates"
               />
               <label className="form-check-label" htmlFor="flatmates">
                 Flatmates
@@ -104,13 +111,11 @@ const handleChange = (e) => {
             </div>
           </div>
         </div>
-        <div className="row justify-content-center">
-          <PropertyAdvertisementCard />
-          <PropertyAdvertisementCard />
-          <PropertyAdvertisementCard />
-          <PropertyAdvertisementCard />
-          <PropertyAdvertisementCard />
-          <PropertyAdvertisementCard />
+        <div className="row justify-content-center mb-4">
+          {propertyData&& propertyData.map((property)=><PropertyAdvertisementCard key={property.id} property={property}/>)
+
+          }
+
         </div>
       </div>
     </>

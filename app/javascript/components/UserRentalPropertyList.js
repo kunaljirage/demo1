@@ -68,3 +68,6 @@ const editClickHandle = (property) =>{
 }
 
 export default UserRentalPropertyList;
+
+
+

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { useUserContext } from "./hooks/userContext";
+import { useNavigate } from 'react-router-dom';
 
 const Signin = () => {
-  const [data,setData] = useState({name:'',email:'',mobile:'',user_name:'',password:''});
-  const {name,email,mobile,user_name,password}=data;
+  const [data,setData] = useState({name:'',email:'',mobile_number:'',password:''});
+  const {name,email,mobile_number,password}=data;
+  const   navigate = useNavigate();
   const handleChange = (e) =>{
  setData({...data,[e.target.name]:e.target.value})
 }
-const {setUser}=useUserContext();
+
 
       const handleSubmit = async(event) =>{
          // console.log(data);
@@ -26,9 +27,8 @@ const {setUser}=useUserContext();
              if(data.message==='successful')
               {
                 alert("Signin successful");
-                setData({name:'',email:'',mobile:'',user_name:'',password:''})
-                setUser(data.user);
-                sessionStorage.setItem("user",data.user);
+                setData({name:'',email:'',mobile:'',password:''})
+                navigate("/login");
               }
               else{
 
@@ -88,19 +88,8 @@ const {setUser}=useUserContext();
                 placeholder="Phone Number"
                 type="phone"
                 id="mobile"
-                name="mobile"
-                value={mobile}
-                onChange={ (e) => handleChange(e)}
-                required
-              />
-
-              <input
-                className="form-control mb-3"
-                placeholder="User Name"
-                type="text"
-                id="user_name"
-                name="user_name"
-                value={user_name}
+                name="mobile_number"
+                value={mobile_number}
                 onChange={ (e) => handleChange(e)}
                 required
               />
