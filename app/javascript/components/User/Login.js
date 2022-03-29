@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import getUserData from "./hooks/getUserData";
-import { useUserContext } from "./hooks/userContext";
+
 
 const Login = () => {
   const [data,setData] = useState({email:'',password:''});
@@ -10,7 +10,7 @@ const Login = () => {
   const handleChange = (e) =>{
  setData({...data,[e.target.name]:e.target.value})
 }
-const {setUser}=useUserContext();
+
 const navigate = useNavigate();
 const location = useLocation();
 
@@ -20,7 +20,7 @@ const setCookie = (cName, cValue) => {
   const expires = "expires=" + date.toUTCString();
   document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
 }
-const from = location.state?.from?.pathname || "/rental_property_details"
+const from = location.state?.from?.pathname || "/rental_house_details"
 
       const handleSubmit =async (event) =>{
           event.preventDefault();

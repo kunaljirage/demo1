@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
- const getProperty = (id) => {
+ const getHouse = (id) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 useEffect(() => {
@@ -8,7 +8,7 @@ useEffect(() => {
   token=token.split("=");
   if(id){
     setLoading(true);
-    fetch(`/api/v1/property/show/${id}`, {
+    fetch(`/api/v1/house/show/${id}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -28,4 +28,4 @@ useEffect(() => {
   return [data,loading];
 }
 
-export default getProperty
+export default getHouse

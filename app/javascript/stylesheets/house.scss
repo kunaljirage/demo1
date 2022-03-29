@@ -1,0 +1,48 @@
+
+
+// see more component
+.details-modal{
+  position: fixed;
+  z-index : 1;
+  padding-top:70px;
+  width: 40%;
+  height: 80%;
+  overflow: auto;
+  top:100px;
+  background-color: #e3e3e3;
+}
+.details-modal-col{
+ width:50%;
+ padding:10px;
+}
+.details-modal-h2{
+    font-size:16px;
+    position:absolute;
+    top:30px;
+    color: #7118e6;
+}
+
+.details-modal-h1{
+  font-size:16.5px;
+  color: #0c20d3;
+}
+.details-modal-lable{
+  font-size:15px;
+  color: #fff;
+}
+.details-modal-cancle{
+  position:absolute;
+  top:0;
+  right:0;
+  background-color:#7c7c7d;
+  border: none ;
+  padding:10px;
+  color:white;
+ }
+
+ .details-contact{
+  font-size:16px;
+  color: #7118e6;
+ }
+
+

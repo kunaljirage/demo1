@@ -10,8 +10,9 @@ import "channels"
 
 import "bootstrap/dist/js/bootstrap"
 import "bootstrap/dist/css/bootstrap"
-//import "stylesheets/application"
-
+import "stylesheets/application"
+import "stylesheets/house"
+import "stylesheets/home"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useUserContext } from "./hooks/userContext";
+import { useUserContext } from "./User/hooks/userContext";
 
 const Header = () => {
    const { user, setUser } = useUserContext();
@@ -50,7 +50,7 @@ const Header = () => {
                   {" "}
                   <Link
                     className="nav-item nav-link"
-                    to="/rental_property_details"
+                    to="/rental_house_details"
                   >
                     Rent Property
                   </Link>
@@ -59,7 +59,7 @@ const Header = () => {
                 {" "}
                 <Link
                   className="nav-item nav-link"
-                  to="/user_rental_property_list"
+                  to="/user_rental_house_list"
                 >
                   See Your Ads List
                 </Link>
@@ -68,8 +68,8 @@ const Header = () => {
               ) : (
                 <>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/signin">
-                      Signin
+                    <Link className="nav-link" to="/signup">
+                      Signup
                     </Link>
                   </li>
                   <li className="nav-item">

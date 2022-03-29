@@ -1,6 +1,6 @@
 import React from "react";
 import AppRoutes from "../Routes/index";
-import { UserProvider } from "./hooks/userContext";
+import { UserProvider } from "./User/hooks/userContext";
 
 
 

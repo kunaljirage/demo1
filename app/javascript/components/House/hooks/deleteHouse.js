@@ -1,13 +1,13 @@
 
 
-const deleteProperty = getUserPropertyData => {
+const deleteHouse = getUserHouseData => {
 
-  const deletePropertyData =async(id)=>{
+  const deleteHouseData =async(id)=>{
     let token= document.cookie;
     token=token.split("=");
     if(id){
 
-      const response= await fetch(`/api/v1/property/delete/${id}`, {
+      const response= await fetch(`/api/v1/house/delete/${id}`, {
         method: "GET",
         headers: {
         Accept: "application/json",
@@ -19,7 +19,7 @@ const deleteProperty = getUserPropertyData => {
         response.json().then(data => {
           if(data)
           {
-          getUserPropertyData();
+          getUserHouseData();
           }
         });
 
@@ -27,8 +27,8 @@ const deleteProperty = getUserPropertyData => {
 
     }
 
-  return [deletePropertyData];
+  return [deleteHouseData];
   }
 
-export default deleteProperty
+export default deleteHouse
 

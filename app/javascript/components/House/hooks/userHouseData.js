@@ -1,14 +1,14 @@
 import { useState } from "react";
 
-const userPropertyData = user =>{
+const userHouseData = () =>{
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
- const getUserPropertyData = () => {
+ const getUserHouseData = () => {
   let token= document.cookie;
   token=token.split("=");
     if(token[1]){
       setLoading(true);
-      fetch(`/api/v1/user/property/`, {
+      fetch(`/api/v1/user/house/`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -22,7 +22,7 @@ const userPropertyData = user =>{
         setData(data)})
           }
   }
-  return [data,loading,getUserPropertyData];
+  return [data,loading,getUserHouseData];
   }
-export default userPropertyData;
+export default userHouseData;
 

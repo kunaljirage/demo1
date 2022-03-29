@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
-const Signin = () => {
-  const [data,setData] = useState({name:'',email:'',mobile_number:'',password:''});
+const SignUp = () => {
+  const [data,setData] = useState({name:'',email:'',mobile_number:'',user_type:'Owner',password:''});
   const {name,email,mobile_number,password}=data;
   const   navigate = useNavigate();
   const handleChange = (e) =>{
@@ -35,14 +35,9 @@ const Signin = () => {
              const errors= (data.errors)
             const error= errors[Object.keys(errors)[0]];
                 alert(error)
-
-                  }
-
-            });
-
-
-
-      }
+                 }
+             });
+          }
   return (
     <>
       <main className="container">
@@ -60,7 +55,7 @@ const Signin = () => {
           >
 
             <form onSubmit ={(event) => handleSubmit(event)} >
-              <h4>Sign-In</h4>
+              <h4>Sign-up</h4>
               <input
                 className="form-control mb-3 mt-3"
                 placeholder="Name"
@@ -94,6 +89,46 @@ const Signin = () => {
                 required
               />
 
+              <div className="row  mb-3" >
+                <div className="row ms-2">
+                <label className="form-check-label p-1">Type :</label>
+                </div>
+                  <div className="row m-2">
+                  <div className="col-md-6 col-xxl-6 col-12 form-check">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="user_type"
+                    value="Owner"
+                    id="owner"
+                    onChange={(e) => handleChange(e)}
+                    checked={ data.user_type=== "Owner"?true:false }
+                  />
+                  <label className="form-check-label" htmlFor="owner">
+                    Owner
+                  </label>
+                    </div>
+                  <div className="col-md-6 col-xxl-6 col-12 form-check">
+                  <div>
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="user_type"
+                    value="Agent"
+                    id="Agent"
+                    onChange={(e) => handleChange(e)}
+                    checked={data.user_type=== "Agent"?true:false }
+                  />
+                  </div>
+                  <div>
+                  <label className="form-check-label" htmlFor="Agent">
+                  Agent
+                  </label>
+                  </div>
+                 </div>
+                </div>
+
+                </div>
               <input
                 className="form-control mb-3"
                 type="password"
@@ -106,7 +141,7 @@ const Signin = () => {
               />
               <div className="d-flex  justify-content-center">
                 <button className="w-100 btn  btn-primary" type="submit">
-                  Sign in
+                  Sign Up
                 </button>
               </div>
             </form>
@@ -117,4 +152,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default SignUp;

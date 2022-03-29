@@ -1,6 +1,7 @@
 import React from 'react'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
-import { useUserContext } from '../components/hooks/userContext'
+import { useUserContext } from '../components/User/hooks/userContext'
+
 
 
 const  ProtectedRoutes = () => {

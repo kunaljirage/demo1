@@ -1,32 +1,96 @@
 import React, { useEffect, useState } from "react";
-import rentalPropertyData from "./hooks/rentalPropertyData";
-import PropertyAdvertisementCard from "./PropertyAdvertisementCard";
+import getFilteredData from "./House/hooks/getFilteredData";
+import HouseAdvertisementCard from "./House/HouseAdvertisementCard";
+import SeeMore from "./House/SeeMore";
 
 const Home = () => {
+  const [seeMoreToggle,setSeeMoreToggle] = useState(false)
   const [citiesData,setCitiesData] = useState([])
-  const [data] = rentalPropertyData();
-  const [city, setCity] = useState("");
-  const [propertyData, setPropertyData] =useState([])
-useEffect(() => {
-  setPropertyData(data)
-  if(data)
+  const [seeMoreData,setSeeMoreData] = useState({})
+  const [houseData, setHouseData] =useState([])
+  const [filter,setFilter]=useState({})
+  const [flag,setFlag]=useState(true)
+  const  [filteredData,loading,filterHouseData]=getFilteredData();
+
+  useEffect(() => {
+if(flag)
+{
+     if(filteredData.length>0)
   {
-  const cities = data.map((property)=>property.city.toLowerCase())
-  var uniqueCities = cities.filter((v, i, a) => a.indexOf(v) == i);
+
+  const cities = filteredData.map((house)=>house.city.toLowerCase())
+  let uniqueCities = cities.filter((v, i, a) => a.indexOf(v) == i);
   uniqueCities = uniqueCities.sort()
-  console.log(data)
   setCitiesData(uniqueCities)
+  setFlag(false)
  }
+  filterHouseData(filter);
+}
+  setHouseData(filteredData)
+ }, [filteredData])
+
+  const handleSelect =(e)=>{
+    if(e.target.value !== "")
+   {
+    setFilter({...filter,[e.target.name]:e.target.value})
+    filterHouseData({...filter,[e.target.name]:e.target.value});
+  }
+  else{
+
+    const key=e.target.name;
+    delete filter[key];
+    console.log(filter)
+    filterHouseData(filter);
+  }
+  }
 
 
- }, [data])
-
-const handleChange = (e) => {
-  setCity(e.target.value);
- };
 
   return (
     <>
+    <div className="container-fluid select_box_background">
+    <div className="d-flex">
+<div>
+<select className="select_box" name='bhk_type' onChange={ (e) => handleSelect(e)} >
+<option  value=""> BHK Type</option>
+<option  value="1 RK">1 RK</option>
+<option  value="1 BHK">1 BHK</option>
+<option  value="2 BHK">2 BHK</option>
+<option  value="3 BHK">3 BHK</option>
+<option  value="3+ BHK">3+ BHK</option>
+</select>
+</div>
+<div>
+  <select className="select_box" name="user_type" onChange={ (e) => handleSelect(e)} >
+<option value="" > Listed By</option>
+<option  value="Agent">Agent</option>
+<option  value="Owner">Owner</option>
+</select>
+</div>
+<div>
+<select className="select_box" name="furnishing_type" onChange={ (e) => handleSelect(e)} >
+<option value=""> Furnishing</option>
+<option  value="Fully Furnished">Fully Furnished</option>
+<option  value="Semi Furnished">Semi Furnished</option>
+<option  value="Unfurnished">Unfurnished</option>
+</select>
+</div>
+<div>
+<select className="select_box" name="property_type"  onChange={ (e) => handleSelect(e)} >
+<option value="" > Property Type</option>
+<option  value="Apartment">Apartment</option>
+<option  value="Independent House">Independent House</option>
+<option  value="Independent Floor">Independent Floor</option>
+<option  value="Duplex">Duplex</option>
+<option  value="Penthouse">Penthouse</option>
+</select>
+
+</div>
+
+
+</div>
+
+     </div>
       <div className="container">
         <div
           className="d-flex flex-column justify-content-center"
@@ -38,8 +102,8 @@ const handleChange = (e) => {
                 className="form-select form-select-sm"
                 aria-label=".form-select-sm "
                 style={{ padding: "7.5px 12px", borderRadius: "0" }}
-                value={city}
-                onChange={(e) => handleChange(e)}
+                name="city"
+                onChange={ (e) => handleSelect(e)}
               >
                 <option value="">Select city</option>
                 {citiesData
@@ -72,50 +136,16 @@ const handleChange = (e) => {
               </form>
             </div>
           </div>
-          <div className="d-flex p-3" style={{ border: "1px solid #ced4da" }}>
-            <div className="col-4 form-check">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="type"
-                id="full_house"
-                value="Full house"
-              />
-              <label className="form-check-label" htmlFor="full_house">
-                Full house
-              </label>
-            </div>
-            <div className="col-4 form-check">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="type"
-                id="pg"
-                value="Pg / hostel"
-              />
-              <label className="form-check-label" htmlFor="pg">
-                Pg / Hostel
-              </label>
-            </div>
-            <div className="col-4 form-check">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="type"
-                id="flatmates"
-                value="Flatmates"
-              />
-              <label className="form-check-label" htmlFor="flatmates">
-                Flatmates
-              </label>
-            </div>
-          </div>
+
         </div>
         <div className="row justify-content-center mb-4">
-          {propertyData&& propertyData.map((property)=><PropertyAdvertisementCard key={property.id} property={property}/>)
+          {houseData.length>0 ? houseData.map((house)=><HouseAdvertisementCard key={house.id} house={house} setSeeMoreData={setSeeMoreData} setSeeMoreToggle={setSeeMoreToggle} />)
+          : <div>Found no projects or properties matching your search criteria </div>
 
           }
-
+         {
+          seeMoreToggle&&<SeeMore data={seeMoreData} setSeeMoreToggle={setSeeMoreToggle}/>
+         }
         </div>
       </div>
     </>

@@ -1,41 +1,43 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import EditRentalPropertyDetails from "../components/EditRentalPropertyDetails";
+import EditRentalHouseDetails from "../components/House/EditRentalHouseDetails";
 import ErrorPage from "../components/ErrorPage";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Home from "../components/Home";
-import getUserData from "../components/hooks/getUserData";
-import Login from "../components/Login";
-import RentalPropertyDetails from "../components/RentalPropertyDetails";
-import Signin from "../components/Signin";
-import UserRentalPropertyList from "../components/UserRentalPropertyList";
-import ProtectedRoutes from "./ProtectedRoutes";
+import Login from "../components/User/Login";
+import RentalHouseDetails from "../components/House/RentalHouseDetails";
+import SignUp from "../components/User/Signup";
+import UserRentalHouseList from "../components/House/UserRentalHouseList";
+import { useUserContext } from "../components/User/hooks/userContext";
+
 
 export default function  AppRoutes(){
-  const [getUser] = getUserData();
-  useEffect(() => {
-   getUser();
-  }, [])
 
+  const {user} = useUserContext()
 
 return( <>
 
  <Router>
    <Header/>
     <Routes>
-      <Route path="/"  exact element={<Home />} />
-      <Route path="/login"  element={<Login />} />
-      <Route path="/signin"  element={<Signin />} />
-      <Route path="/*"  element={<ErrorPage />} />
+     {user ?
 
-      <Route  element={<ProtectedRoutes />}>
-      <Route path="/rental_property_details"  element={<RentalPropertyDetails />} />
-      <Route path="/user_rental_property_list"  element={<UserRentalPropertyList />} />
-      <Route path="/edit_rental_property_details"  element={<EditRentalPropertyDetails />} />
-      </Route>
+      <>
+      <Route path="/rental_house_details" exact element={<RentalHouseDetails />} />
+      <Route path="/user_rental_house_list"  element={<UserRentalHouseList />} />
+      <Route path="/edit_rental_house_details"  element={<EditRentalHouseDetails />} />
+      </>
+       :
+      <>
+      <Route path="/login"  element={<Login />} />
+      <Route path="/signup"  element={<SignUp />} />
+      </>
+    }
+       <Route path="/"  exact element={<Home />} />
+      <Route path="/*"  element={<ErrorPage />} />
     </Routes>
-   <Footer/>
+
   </Router>
   </>
  )
