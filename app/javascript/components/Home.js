@@ -63,8 +63,8 @@ if(flag)
 <div>
   <select className="select_box" name="user_type" onChange={ (e) => handleSelect(e)} >
 <option value="" > Listed By</option>
-<option  value="Agent">Agent</option>
-<option  value="Owner">Owner</option>
+<option  value="agent">Agent</option>
+<option  value="owner">Owner</option>
 </select>
 </div>
 <div>
@@ -140,9 +140,8 @@ if(flag)
         </div>
         <div className="row justify-content-center mb-4">
           {houseData.length>0 ? houseData.map((house)=><HouseAdvertisementCard key={house.id} house={house} setSeeMoreData={setSeeMoreData} setSeeMoreToggle={setSeeMoreToggle} />)
-          : <div>Found no projects or properties matching your search criteria </div>
-
-          }
+          : flag?<div>Found no projects or properties</div>:<div>Found no projects or properties matching your search criteria </div>
+         }
          {
           seeMoreToggle&&<SeeMore data={seeMoreData} setSeeMoreToggle={setSeeMoreToggle}/>
          }

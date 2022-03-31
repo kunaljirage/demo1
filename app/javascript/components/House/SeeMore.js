@@ -14,7 +14,7 @@ const  SeeMore =props=> {
     <div className='col-6 details-modal-col'>
      <div className='mb-2'>
       <div className='details-modal-lable'>Full address</div>
-      <span>dfkgknnkk</span>
+      <span>{data.full_address}</span>
     </div>
     <div className='mb-2'>
       <div className='details-modal-lable'>Furnishing</div>

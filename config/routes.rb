@@ -5,12 +5,15 @@ Rails.application.routes.draw do
       post 'auth/login', to: 'authentication#login'
       get 'user/show', to: 'user#show'
       get 'user/destroy'
-      post 'house/index', to: 'house#index'
-      post 'house/', to: 'house#create'
-      get 'user/house/', to: 'house#show'
-      get 'house/show/:id', to: 'house#show_one'
-      post 'house/edit/:id', to: 'house#edit'
-      get 'house/delete/:id', to: 'house#delete'
+
+      resources :properties
+
+      # post 'house/index', to: 'house#index'
+      # post 'house/', to: 'house#create'
+      # get 'user/house/', to: 'house#show'
+      # get 'house/show/:id', to: 'house#show_one'
+      # post 'house/edit/:id', to: 'house#edit'
+      # get 'house/delete/:id', to: 'house#delete'
     end
   end
   root 'home#index'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_23_091625) do
+ActiveRecord::Schema.define(version: 2022_03_30_101112) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,33 +40,34 @@ ActiveRecord::Schema.define(version: 2022_03_23_091625) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "houses", force: :cascade do |t|
+  create_table "properties", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "owner_name", null: false
     t.integer "owner_contact_number", null: false
     t.string "city", null: false
     t.float "rental_price", null: false
-    t.string "property_type", null: false
-    t.string "bhk_type", null: false
-    t.string "furnishing_type", null: false
+    t.integer "property_type", null: false
+    t.integer "bhk_type", null: false
+    t.integer "furnishing_type", null: false
     t.decimal "build_up_area", null: false
     t.decimal "carpet_area", null: false
     t.string "available_from", null: false
     t.integer "security", default: 0, null: false
-    t.integer "floor_number"
+    t.integer "floor_number", default: 0, null: false
     t.string "parking", null: false
     t.integer "bathrooms", null: false
     t.integer "age_of_property", null: false
     t.string "main_entrance_facing", null: false
+    t.string "full_address", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_houses_on_user_id"
+    t.index ["user_id"], name: "index_properties_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
-    t.string "user_type", null: false
+    t.integer "user_type", null: false
     t.integer "mobile_number", null: false
     t.string "password_digest", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -75,5 +76,5 @@ ActiveRecord::Schema.define(version: 2022_03_23_091625) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "houses", "users"
+  add_foreign_key "properties", "users"
 end

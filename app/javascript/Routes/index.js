@@ -24,9 +24,9 @@ return( <>
      {user ?
 
       <>
-      <Route path="/rental_house_details" exact element={<RentalHouseDetails />} />
-      <Route path="/user_rental_house_list"  element={<UserRentalHouseList />} />
-      <Route path="/edit_rental_house_details"  element={<EditRentalHouseDetails />} />
+      <Route path="/properties/new" exact element={<RentalHouseDetails />} />
+      <Route path="/properties"  element={<UserRentalHouseList />} />
+      <Route path="/properties/:id/edit" element={<EditRentalHouseDetails />}/>
       </>
        :
       <>

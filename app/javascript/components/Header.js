@@ -46,22 +46,14 @@ const Header = () => {
 
               {user ? (
                 <>
-                <li className="nav-item">
-                  {" "}
-                  <Link
-                    className="nav-item nav-link"
-                    to="/rental_house_details"
-                  >
-                    Rent Property
-                  </Link>
-                </li>
+
                 <li className="nav-item">
                 {" "}
                 <Link
                   className="nav-item nav-link"
-                  to="/user_rental_house_list"
+                  to="/properties"
                 >
-                  See Your Ads List
+                  See Your Ads
                 </Link>
               </li>
               </>

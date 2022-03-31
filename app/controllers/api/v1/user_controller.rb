@@ -12,7 +12,7 @@ class Api::V1::UserController < ApplicationController
   end
 
   def show
-    user=@current_user.slice :name, :email, :mobile_number
+    user=@current_user.slice :name, :email, :mobile_number, :id
     render json:{ user:user, message: 'successful'}, status: 201
   end
 

@@ -20,7 +20,7 @@ const setCookie = (cName, cValue) => {
   const expires = "expires=" + date.toUTCString();
   document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
 }
-const from = location.state?.from?.pathname || "/rental_house_details"
+const from = location.state?.from?.pathname || "/"
 
       const handleSubmit =async (event) =>{
           event.preventDefault();

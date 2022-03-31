@@ -99,10 +99,10 @@ const SignUp = () => {
                     className="form-check-input"
                     type="radio"
                     name="user_type"
-                    value="Owner"
+                    value="owner"
                     id="owner"
                     onChange={(e) => handleChange(e)}
-                    checked={ data.user_type=== "Owner"?true:false }
+                    checked={ data.user_type=== "owner"?true:false }
                   />
                   <label className="form-check-label" htmlFor="owner">
                     Owner
@@ -114,14 +114,14 @@ const SignUp = () => {
                     className="form-check-input"
                     type="radio"
                     name="user_type"
-                    value="Agent"
-                    id="Agent"
+                    value="agent"
+                    id="agent"
                     onChange={(e) => handleChange(e)}
-                    checked={data.user_type=== "Agent"?true:false }
+                    checked={data.user_type=== "agent"?true:false }
                   />
                   </div>
                   <div>
-                  <label className="form-check-label" htmlFor="Agent">
+                  <label className="form-check-label" htmlFor="agent">
                   Agent
                   </label>
                   </div>

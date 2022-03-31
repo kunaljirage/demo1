@@ -7,8 +7,8 @@ const deleteHouse = getUserHouseData => {
     token=token.split("=");
     if(id){
 
-      const response= await fetch(`/api/v1/house/delete/${id}`, {
-        method: "GET",
+      const response= await fetch(`/api/v1/properties/${id}`, {
+        method: "DELETE",
         headers: {
         Accept: "application/json",
         'Content-Type':'application/json',

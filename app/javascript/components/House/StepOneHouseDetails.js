@@ -61,11 +61,11 @@ import React from 'react'
                  BHK Type
               </label>
                  <select className="form-select mb-3" value={bhk_type || ''} aria-label="bhk_type" id="bhk_type" onChange={ (e) => handleSelect(e)} >
-                <option  value="1 RK">1 RK</option>
-                <option  value="1 BHK">1 BHK</option>
-                <option  value="2 BHK">2 BHK</option>
-                <option  value="3 BHK">3 BHK</option>
-                <option  value="3+ BHK">3+ BHK</option>
+                  <option  value="1 RK">1 RK</option>
+                  <option  value="1 BHK">1 BHK</option>
+                  <option  value="2 BHK">2 BHK</option>
+                  <option  value="3 BHK">3 BHK</option>
+                  <option  value="3+ BHK">3+ BHK</option>
                 </select>
 
                   </div>
@@ -75,9 +75,9 @@ import React from 'react'
                 Furnishing
               </label>
                  <select className="form-select mb-3" value={furnishing_type || ''} aria-label="furnishing_type" id="furnishing_type" onChange={ (e) => handleSelect(e)} >
-                <option  value="Fully Furnished">Fully Furnished</option>
-                <option  value="Semi Furnished">Semi Furnished</option>
-                <option  value="Unfurnished">Unfurnished</option>
+                 <option  value="Fully Furnished">Fully Furnished</option>
+                  <option  value="Semi Furnished">Semi Furnished</option>
+                  <option  value="Unfurnished">Unfurnished</option>
                 </select>
               </div>
               </div>
@@ -86,11 +86,11 @@ import React from 'react'
               Property Type
               </label>
                  <select className="form-select mb-3" value={property_type || ''} aria-label="property_type" id="property_type" onChange={ (e) => handleSelect(e)} >
-                <option  value="Apartment">Apartment</option>
-                <option  value="Independent House">Independent House</option>
-                <option  value="Independent Floor">Independent Floor</option>
-                <option  value="Duplex">Duplex</option>
-                <option  value="Penthouse">Penthouse</option>
+                  <option  value="Apartment">Apartment</option>
+                  <option  value="Independent House">Independent House</option>
+                  <option  value="Independent Floor">Independent Floor</option>
+                  <option  value="Duplex">Duplex</option>
+                  <option  value="Penthouse">Penthouse</option>
                 </select>
 
                   </div>

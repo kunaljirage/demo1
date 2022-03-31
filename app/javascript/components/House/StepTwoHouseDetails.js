@@ -92,9 +92,10 @@ import React from 'react'
               Bathrooms
               </label>
                  <select className="form-select mb-3 " value={bathrooms} aria-label="bathrooms" id="bathrooms"onChange={ (e) => handleSelect(e)} >
-                <option  value="1">1</option>
-                <option  value="2">2</option>
-                <option  value="3">3</option>
+                <option  value="One">1</option>
+                <option  value="Two">2</option>
+                <option  value="Three">3</option>
+                <option  value="More than three">3+</option>
                 </select>
               </div>
               </div>

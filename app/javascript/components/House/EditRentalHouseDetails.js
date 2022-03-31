@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useParams,useNavigate } from "react-router-dom";
 import getHouse from "./hooks/getHouse";
 import StepOneHouseDetails from "./StepOneHouseDetails";
 import StepTwoHouseDetails from "./StepTwoHouseDetails";
 
 const EditRentalHouseDetails = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-
-  if(location.state!==null){
+  //const location = useLocation();
+  const params=useParams();
+  //if(location.state!==null){
    const file = useRef();
    const [step, setStep] = useState(true)
-   const [houseData,loading] = getHouse(location.state.house.id)
+   const [houseData,loading] = getHouse(params.id)
    const [data, setData] = useState({
     owner_name: "",
     owner_contact_number: "",
@@ -61,27 +61,21 @@ const handleSelect = (e) => {
     let token= document.cookie;
     token=token.split("=");
     if(token[1]){
-    const response = await fetch(`/api/v1/house/edit/${location.state.house.id}`, {
-      method: "POST",
+    const response = await fetch(`/api/v1/properties/${params.id}`, {
+      method: "PUT",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         'Authorization':token[1]
       },
-      body: JSON.stringify({ house: { ...data } }),
+      body: JSON.stringify({ property: { ...data } }),
     });
 
     response.json().then((data) => {
      if(data.message=="successful")
      {
-      setData({
-        owner_name: "",
-        owner_contact_number: "",
-        rental_type: "",
-        price: "",
-        city: "",
-      });
-      navigate("/user_rental_house_list")
+      setData({});
+      navigate("/properties")
     }
     });
   }
@@ -108,11 +102,7 @@ loading ?
     />}
   </>
   );
-          }else{
-            setTimeout(()=>{navigate("/user_rental_house_list")}, 1000);
 
-            return null
-          }
 };
 
 export default EditRentalHouseDetails;

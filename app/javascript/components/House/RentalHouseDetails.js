@@ -18,7 +18,7 @@ const RentalHouseDetails = () => {
     security: "",
     floor_number: "",
     parking: "",
-    bathrooms: "1",
+    bathrooms: "One",
     age_of_property: "",
     main_entrance_facing: "",
     image:"",
@@ -43,7 +43,7 @@ const RentalHouseDetails = () => {
     token = token.split("=");
 
     if (token[1]) {
-      const response = await fetch(`/api/v1/house/`, {
+      const response = await fetch('/api/v1/properties', {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -80,7 +80,6 @@ const RentalHouseDetails = () => {
    }
   };
   const handleSelect = (e) => {
-   // console.log(e.target.value, e.target.id);
     setData({ ...data, [e.target.id]: e.target.value });
   };
   const handleClickNext = () => {setStep(false)};
